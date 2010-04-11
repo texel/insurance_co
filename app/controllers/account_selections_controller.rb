@@ -1,0 +1,2 @@
+class AccountSelectionsController < ApplicationController
+end
