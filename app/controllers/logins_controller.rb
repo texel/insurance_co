@@ -15,7 +15,7 @@ class LoginsController < ApplicationController
           session[:accounts] << account_hash(a)
         end
         
-        redirect_to account_selection_path
+        redirect_to new_account_selection_path
       else
         session[:account] = account_hash(result.accounts.first)
         redirect_to account_path

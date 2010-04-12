@@ -60,7 +60,7 @@ describe LoginsController do
             a.user_id      = '23456'
             a.user_name    = 'Bob User'
             a.account_name = 'Test Account Two'
-          end,
+          end
         ]))
       end
       
@@ -71,7 +71,7 @@ describe LoginsController do
       
       it "should redirect to account_selections_controller" do
         post :create, :email => 'foo@bar.com', :password => 'baz'
-        response.should redirect_to(account_selection_path)
+        response.should redirect_to(new_account_selection_path)
       end
     end
   end
