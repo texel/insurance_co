@@ -18,7 +18,60 @@ describe LoginsController do
       
       it "should redirect to new" do
         post :create, :email => 'foo@bar.com', :password => 'baz'
-        response.should redirect_to('new')
+        response.should redirect_to(new_login_path)
+      end
+    end
+    
+    context "with a valid login and one account" do
+      before(:each) do
+        Docusign::Base.stubs(:credentials).returns(stub(:success? => true, :accounts => [
+          Docusign::Credential::ArrayOfAccount::Account.new.tap do |a| 
+            a.account_id   = '12345'
+            a.user_id      = '12345'
+            a.user_name    = 'Joe User'
+            a.account_name = 'Test Account'
+          end
+        ]))
+      end
+      
+      it "should store the account information in the session" do
+        post :create, :email => 'foo@bar.com', :password => 'baz'
+        session[:account][:account_id].should == '12345'
+      end
+      
+      it "should redirect to accounts controller" do
+        post :create, :email => 'foo@bar.com', :password => 'baz'
+        response.should redirect_to(account_path)
+      end
+    end
+    
+    context "with a valid login and more than one account" do
+      before(:each) do
+        Docusign::Base.stubs(:credentials).returns(stub(:success? => true, :accounts => [
+          Docusign::Credential::ArrayOfAccount::Account.new.tap do |a| 
+            a.account_id   = '12345'
+            a.user_id      = '12345'
+            a.user_name    = 'Joe User'
+            a.account_name = 'Test Account'
+          end,
+          
+          Docusign::Credential::ArrayOfAccount::Account.new.tap do |a| 
+            a.account_id   = '23456'
+            a.user_id      = '23456'
+            a.user_name    = 'Bob User'
+            a.account_name = 'Test Account Two'
+          end,
+        ]))
+      end
+      
+      it "should store both accounts in the session" do
+        post :create, :email => 'foo@bar.com', :password => 'baz'
+        session[:accounts].all? { |a| a.is_a?(Hash) }.should be_true
+      end
+      
+      it "should redirect to account_selections_controller" do
+        post :create, :email => 'foo@bar.com', :password => 'baz'
+        response.should redirect_to(account_selection_path)
       end
     end
   end
