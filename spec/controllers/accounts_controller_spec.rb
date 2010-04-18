@@ -1,10 +1,25 @@
 require 'spec_helper'
 
 describe AccountsController do
-
-  #Delete this example and add some real ones
-  it "should use AccountsController" do
-    controller.should be_an_instance_of(AccountsController)
+  integrate_views
+  
+  describe "#show" do
+    context "no account in the session" do
+      it "should redirect to login" do
+        get :show
+        response.should redirect_to(login_path)
+      end
+    end
+    
+    context "with an account but no template in the session" do
+      before(:each) do
+        session.account = {}
+      end
+      
+      it "should redirect to new_template_path" do
+        get :show
+        response.should redirect_to(new_template_path)
+      end
+    end
   end
-
 end

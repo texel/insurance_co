@@ -6,9 +6,10 @@ class AccountSelectionsController < ApplicationController
   end
   
   def create
-    session[:account] = session[:accounts].find { |a| a[:account_id] == params[:account_id] }
+    session[:account]  = session[:accounts].find { |a| a[:account_id] == params[:account_id] }
     session[:accounts] = nil
-    render :nothing => true
+    
+    redirect_to new_template_path
   end
   
   protected

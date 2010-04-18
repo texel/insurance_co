@@ -69,7 +69,8 @@ describe AccountSelectionsController do
       end
       
       it "should redirect to templates_controller#new" do
-        
+        post :create, :account_id => '12345'
+        response.should redirect_to(new_template_path)
       end
     end
   end

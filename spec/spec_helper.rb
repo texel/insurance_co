@@ -5,6 +5,12 @@ require File.expand_path(File.join(File.dirname(__FILE__),'..','config','environ
 require 'spec/autorun'
 require 'spec/rails'
 
+# Mix Intercession into each test case session
+Intercession.test!
+
+# No connections to the tubes allowed.
+FakeWeb.allow_net_connect = false
+
 # Uncomment the next line to use webrat's matchers
 #require 'webrat/integrations/rspec-rails'
 

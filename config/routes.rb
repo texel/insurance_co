@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :login, :only => [:new, :create]
   map.resource :account
   map.resource :account_selection, :only => [:new, :create]
-  
+  map.resource :template, :only => [:new, :create]
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action

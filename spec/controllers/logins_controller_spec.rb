@@ -39,9 +39,14 @@ describe LoginsController do
         session[:account][:account_id].should == '12345'
       end
       
-      it "should redirect to accounts controller" do
+      it "should store the password in the session" do
         post :create, :email => 'foo@bar.com', :password => 'baz'
-        response.should redirect_to(account_path)
+        session[:password].should == 'baz'
+      end
+      
+      it "should redirect to templates controller" do
+        post :create, :email => 'foo@bar.com', :password => 'baz'
+        response.should redirect_to(new_template_path)
       end
     end
     
