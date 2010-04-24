@@ -15,7 +15,7 @@ module Transient
       end
     end
     
-    sattr_accessor :account, :password, :template_id
+    sattr_accessor :account, :password, :template_id, :template
     
   end
 end

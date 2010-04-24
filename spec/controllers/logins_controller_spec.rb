@@ -80,4 +80,22 @@ describe LoginsController do
       end
     end
   end
+  
+  describe "#destroy" do
+    context "with an account in the session" do
+      before(:each) do
+        session.account = {}
+      end
+      
+      it "should destroy the session" do
+        delete :destroy
+        session.account.should be_nil
+      end
+      
+      it "should redirect to new" do
+        delete :destroy
+        response.should redirect_to(new_login_path)
+      end
+    end
+  end
 end

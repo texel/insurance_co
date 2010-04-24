@@ -28,4 +28,9 @@ class LoginsController < ApplicationController
       redirect_to new_login_path
     end
   end
+  
+  def destroy
+    reset_session
+    redirect_to new_login_path
+  end
 end

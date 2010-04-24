@@ -57,4 +57,27 @@ Spec::Runner.configure do |config|
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
+  
+  def build_test_envelope
+    Docusign::Envelope.new.tap do |e|
+      doc = Docusign::Document.new
+      tabs = doc.tabs do |d| 
+        d.tab :name => 'Make'
+        d.tab :name => 'Model'
+        d.tab :name => 'VIN'
+      end
+      
+      e.tabs = tabs
+      
+      e.recipients = [
+        Docusign::Recipient.new.tap do |r|
+          r.template_required = true
+          r.type              = Docusign::RecipientTypeCode::Signer
+          r.template_locked   = true
+          r.role_name         = 'Insured'
+          r.user_name         = "Mike Borozdin"
+        end
+      ]
+    end
+  end
 end

@@ -3,10 +3,12 @@ ActionController::Routing::Routes.draw do |map|
   
   map.root :controller => 'home'
   
-  map.resource :login, :only => [:new, :create]
-  map.resource :account
-  map.resource :account_selection, :only => [:new, :create]
-  map.resource :template, :only => [:new, :create]
+  map.resource  :login, :only => [:new, :create, :destroy]
+  map.resource  :account
+  map.resource  :account_selection, :only => [:new, :create]
+  map.resource  :template, :only => [:new, :create]
+  map.resources :insurance_applications
+  
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action

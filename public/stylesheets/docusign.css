@@ -167,6 +167,22 @@ ul.home_menu {
 
 /* form */
 
+fieldset {
+  border-style: none;
+  margin-bottom: 2em;
+}
+
+legend {
+  float: left;
+  width: 100%;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: .5em;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #949494;
+}
+
 form ol {
   list-style: none;
   margin-bottom: 20px;
@@ -182,6 +198,15 @@ form li {
 
 form label {
   display: block;
+}
+
+form .radio_buttons {
+  margin-bottom: 1em;
+}
+
+/* Account Home */
+ol#account_menu {
+  list-style: none;
 }
 
 /* Account Listings */
@@ -208,7 +233,7 @@ dt, dd {
 /* Errors */
 
 .errorExplanation {
-  border: 1px solid #f00;
+  border: 3px solid #f00;
   padding: 10px;
   margin-bottom: 10px;
 }

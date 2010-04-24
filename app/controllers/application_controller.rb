@@ -36,4 +36,12 @@ class ApplicationController < ActionController::Base
       :user_id      => account.user_id
     }
   end
+    
+  def verify_account
+    redirect_to new_login_path unless session.account && session.password
+  end
+  
+  def verify_template
+    redirect_to new_template_path unless session.template_id
+  end
 end
