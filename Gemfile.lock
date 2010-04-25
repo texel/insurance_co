@@ -1,17 +1,21 @@
 --- 
 dependencies: 
-  fakeweb: 
-    group: 
-    - :test
-    version: ">= 0"
   soap4r: 
     group: 
     - :default
+    version: ">= 0"
+  fakeweb: 
+    group: 
+    - :test
     version: ">= 0"
   rails: 
     group: 
     - :default
     version: = 2.3.5
+  mysql: 
+    group: 
+    - :production
+    version: ">= 0"
   sqlite3-ruby: 
     group: 
     - :default
@@ -30,7 +34,7 @@ dependencies:
     group: 
     - :test
     version: ">= 1.3.2"
-  mocha: 
+  factory_girl: 
     group: 
     - :test
     version: ">= 0"
@@ -40,7 +44,7 @@ dependencies:
     version: ">= 0.7.1"
     require: 
     - docusign
-  factory_girl: 
+  mocha: 
     group: 
     - :test
     version: ">= 0"
@@ -71,6 +75,8 @@ specs:
     version: 2.0.0
 - mocha: 
     version: 0.9.8
+- mysql: 
+    version: 2.8.1
 - rails: 
     version: 2.3.5
 - rspec: 
@@ -81,7 +87,7 @@ specs:
     version: 1.5.8
 - sqlite3-ruby: 
     version: 1.2.5
-hash: 3303e02fe6d2c0c300c8157c1b865b455f6b2ea8
+hash: 43891c8bc76cf3549650d385e846d0e918df7a4d
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

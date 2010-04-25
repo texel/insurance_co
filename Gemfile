@@ -13,3 +13,7 @@ group :test do
   gem 'factory_girl'
   gem 'fakeweb'
 end
+
+group :production do
+  gem 'mysql'
+end
