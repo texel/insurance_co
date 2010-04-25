@@ -82,11 +82,6 @@ describe TemplatesController do
           get :new
           session.template_id.should be_present
         end
-        
-        it "should put the template in the session" do
-          get :new
-          session.template.should be_an_instance_of(Docusign::EnvelopeTemplate)
-        end
       end
 
       context "with no matching template" do

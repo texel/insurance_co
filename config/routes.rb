@@ -7,7 +7,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resource  :account
   map.resource  :account_selection, :only => [:new, :create]
   map.resource  :template, :only => [:new, :create]
+  map.resource  :signing_session, :only => [:show]
   map.resources :insurance_applications
+  map.resources :envelopes
   
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'

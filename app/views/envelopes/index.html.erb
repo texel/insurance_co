@@ -1,0 +1,16 @@
+<h1>Envelopes</h1>
+
+<% @statuses.each do |s| %>
+  <div class="envelope_listing">
+    <dl>
+      <dt>Subject</dt>
+      <dd><%= s.subject %></dd>
+      <dt>Status</dt>
+      <dd><%= s.status %></dd>
+    </dl>
+  </div>
+<% end %>
+
+<hr>
+<p><%= link_to "Back To Account", account_path %>
+

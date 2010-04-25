@@ -29,6 +29,8 @@ class InsuranceApplication < ActiveRecord::Tableless
       e.envelope_id_stamping = true
       
       e.recipients.each do |r|
+        r.email = signer_email if signer_email
+        
         r.signature_info = Docusign::RecipientSignatureInfo.new.tap do |i|
           i.signature_initials = initials(r.user_name)
           i.font_style         = Docusign::FontStyleCode::BradleyHandITC

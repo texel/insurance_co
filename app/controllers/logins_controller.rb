@@ -6,21 +6,18 @@ class LoginsController < ApplicationController
     result = Docusign::Base.credentials(params[:email], params[:password], Docusign::Config[:credential_endpoint_url])
     
     if result.success?
-      # Store the password- we'll need it for the rest of the session
-      session[:password] = params[:password]
+      # Store the email and password- we'll need them for the rest of the session
+      session.email    = params[:email]
+      session.password = params[:password]
       
       # See if there are multiple accounts
       if result.accounts.size > 1
-        # Store both accounts for disambiguation
-        session[:accounts] = []
-        
-        result.accounts.each do |a|
-          session[:accounts] << account_hash(a)
-        end
+        # Store all accounts for disambiguation
+        session.accounts = result.accounts.map { |a| account_hash(a) }
         
         redirect_to new_account_selection_path
       else
-        session[:account] = account_hash(result.accounts.first)
+        session.account = account_hash(result.accounts.first)
         redirect_to new_template_path
       end
     else

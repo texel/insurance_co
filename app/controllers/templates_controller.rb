@@ -24,15 +24,7 @@ class TemplatesController < ApplicationController
     templates = response.request_templates_result
     
     if t = templates.find { |t| t.name == InsuranceCo::TEMPLATE_NAME }
-      session.template_id = t.template_id
-      
-      # This is kind of a kludge, but it's easiest to just serialize the entire
-      # template object into the session as well. It's not *that* big.
-      response = ds_connection.request_template :templateID => t.template_id, :includeDocumentBytes => false
-      template = response.request_template_result
-      
-      session.template = template
-      
+      session.template_id = t.template_id      
       redirect_to account_path
     end
   end

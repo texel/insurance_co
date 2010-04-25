@@ -4,18 +4,6 @@ describe InsuranceApplication do
   before(:each) do
     @app = Factory(:insurance_application)
     
-    # @account_hash = {
-    #   :account_id   => '12345',
-    #   :account_name => 'Awesome Account',
-    #   :email        => 'foobar@baz.com',
-    #   :user_name    => 'Mike Borozdin',
-    #   :user_id      => '12345'
-    # }
-    # 
-    # @session = ActionController::TestSession.new
-    # @session.account = @account_hash
-    # @session.template = OpenStruct.new
-    
     # This is in spec_helper.rb
     @envelope = build_test_envelope
   end

@@ -63,11 +63,29 @@ describe InsuranceApplicationsController do
         let(:valid_data) { Factory.attributes_for(:insurance_application) }
         
         context "sending the envelope" do
+          def create_and_send_stub
+            stub(
+              :create_and_send_envelope_result => stub(
+                :envelope_id => '12345',
+                :status => 'pending'
+              )
+            )
+          end
+          
+          before(:each) do
+            Docusign::APIServiceSoap.any_instance.stubs(:create_and_send_envelope).returns(create_and_send_stub)
+          end
+          
           let(:send_envelope) { post :create, :insurance_application => valid_data.merge(:completion_option => 'send') }
           
-          it "should succeed" do
+          it "should redirect to envelope path" do
             send_envelope
-            response.should be_success
+            response.should redirect_to(envelopes_path)
+          end
+          
+          it "should create and send the envelope" do
+            Docusign::APIServiceSoap.any_instance.expects(:create_and_send_envelope).returns(create_and_send_stub)
+            send_envelope
           end
         end
       end
