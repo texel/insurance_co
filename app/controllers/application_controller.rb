@@ -18,16 +18,6 @@ class ApplicationController < ActionController::Base
       c.endpoint_url = Docusign::Config[:credential_endpoint_url]
     end
   end
-  
-  def account_hash(account)
-    {
-      :account_id   => account.account_id,
-      :account_name => account.account_name,
-      :email        => account.email,
-      :user_name    => account.user_name,
-      :user_id      => account.user_id
-    }
-  end
     
   def verify_account
     redirect_to new_login_path unless session.account && session.password

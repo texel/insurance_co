@@ -30,4 +30,16 @@ class LoginsController < ApplicationController
     reset_session
     redirect_to new_login_path
   end
+  
+  protected
+  
+  def account_hash(account)
+    {
+      :account_id   => account.account_id,
+      :account_name => account.account_name,
+      :email        => account.email,
+      :user_name    => account.user_name,
+      :user_id      => account.user_id
+    }
+  end
 end
