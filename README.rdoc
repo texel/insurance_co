@@ -10,13 +10,13 @@
 
 * docusign.yml is read in config/initializers/docusign.rb
 
-* [John Barnette's](http://github.com/jbarnette) fabulous gem [Intercession](http://github.com/jbarnette/intercession)
+* {John Barnette's}[http://github.com/jbarnette] fabulous gem {Intercession}[http://github.com/jbarnette/intercession]
   is used throughout this app to add accessors and methods directly to the session object.
   Look in /app/models/transient/session.rb for details.
 
 * the docusign gem contains some convenient features which make calling the Docusign API
   much more Ruby-like. You can see these in action throughout this application.
-  Refer to the [docusign gem documentation](http://github.com/texel/docusign) for more information
+  Refer to the {docusign gem documentation}[http://github.com/texel/docusign] for more information
 
 == Copyright (C) DocuSign, Inc. All rights reserved.
 
