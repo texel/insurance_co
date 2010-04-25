@@ -5,3 +5,4 @@ config/docusign.yml
 Capfile
 config/deploy.rb
 .bundle
+tmp/*
