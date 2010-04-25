@@ -32,15 +32,15 @@ class InsuranceApplicationsController < ApplicationController
         
       when 'customize'
         # Embedded sending
-        response        = ds_connection.create_and_send_envelope :envelope => @envelope
-        envelope_status = response.create_and_send_envelope_result
+        response        = ds_connection.create_envelope :envelope => @envelope
+        envelope_status = response.create_envelope_result
         
         token_response = ds_credential_connection.request_sender_token(
           :email      => session.email,
           :password   => session.password,
           :accountID  => session.account[:account_id],
           :envelopeID => envelope_status.envelope_id,
-          :returnURL  => ''
+          :returnURL  => envelopes_url
         )
         
         redirect_to token_response.request_sender_token_result

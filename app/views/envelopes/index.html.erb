@@ -1,16 +1,23 @@
 <h1>Envelopes</h1>
 
-<% @statuses.each do |s| %>
-  <div class="envelope_listing">
-    <dl>
-      <dt>Subject</dt>
-      <dd><%= s.subject %></dd>
-      <dt>Status</dt>
-      <dd><%= s.status %></dd>
-    </dl>
-  </div>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>Envelope ID</th>
+      <th>Subject</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @statuses.each do |s| %>
+      <tr>
+        <td><%= s.envelope_id %></td>
+        <td><%= link_to s.subject, envelope_path(s.envelope_id) %></td>
+        <td><%= s.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <hr>
 <p><%= link_to "Back To Account", account_path %>
-

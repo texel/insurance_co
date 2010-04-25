@@ -39,7 +39,7 @@ body {
 
 #top_menu {
   overflow: hidden;
-  background-color: #1085c7;
+  background-color: #e4a300;
   width: 100%;
 }
 
@@ -124,11 +124,11 @@ p.flash {
 }
 
 table {
-  border: 1px solid #1085c7;
+  border: 1px solid #e4a300;
 }
 
 thead tr {
-  background-color: #1085c7;
+  background-color: #e4a300;
 }
 
 th {
