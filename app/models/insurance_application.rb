@@ -29,13 +29,17 @@ class InsuranceApplication < ActiveRecord::Tableless
       e.envelope_id_stamping = true
       
       e.recipients.each do |r|
+        r.signer_name = full_name
+        r.user_name   = full_name
         r.email = signer_email if signer_email
         
         r.signature_info = Docusign::RecipientSignatureInfo.new.tap do |i|
-          i.signature_initials = initials(r.user_name)
+          i.signature_initials = initials(r.signer_name)
           i.font_style         = Docusign::FontStyleCode::BradleyHandITC
           i.signature_name     = r.user_name
         end
+        
+        logger.debug "recipient: #{r.inspect}"
       end
       
       %w[Make Model VIN].each do |attr|
@@ -46,6 +50,10 @@ class InsuranceApplication < ActiveRecord::Tableless
   end
   
   protected
+  
+  def full_name
+    "#{first_name} #{last_name}"
+  end
   
   def initials(name)
     name.to_s.split(' ').map(&:first).map(&:upcase).join

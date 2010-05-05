@@ -15,7 +15,7 @@ module Transient
       end
     end
     
-    sattr_accessor :accounts, :account, :email, :password, :template_id
+    sattr_accessor :accounts, :account, :email, :password, :template_id, :envelope_id
     attr_writer    :template
     
     def template(options = {})

@@ -8,13 +8,14 @@ class InsuranceApplicationsController < ApplicationController
       @envelope  = @insurance_application.fill_envelope(session.template(:include_document_bytes => true).envelope)
       @recipient = @envelope.recipients.first
       
+      # There are three options here: Deferred Sending, Embedded Signing, and Embedded Sending (customization)      
       case @insurance_application.completion_option
       when 'send'
         # Deferred sending
         response        = ds_connection.create_and_send_envelope :envelope => @envelope
         envelope_status = response.create_and_send_envelope_result
 
-        redirect_to envelopes_path
+        redirect_to envelope_path(envelope_id)
         
       when 'complete'
         # Embedded signing
@@ -25,6 +26,9 @@ class InsuranceApplicationsController < ApplicationController
         response        = ds_connection.create_and_send_envelope :envelope => @envelope
         envelope_status = response.create_and_send_envelope_result
         
+        # Store the envelope_id so we can refer to it later
+        session.envelope_id = envelope_status.envelope_id
+        
         token = generate_recipient_token @recipient, envelope_status
         token_response = ds_connection.request_recipient_token token
         
@@ -34,6 +38,9 @@ class InsuranceApplicationsController < ApplicationController
         # Embedded sending
         response        = ds_connection.create_envelope :envelope => @envelope
         envelope_status = response.create_envelope_result
+        
+        # Store the envelope_id so we can refer to it later
+        session.envelope_id = envelope_status.envelope_id
         
         token_response = ds_credential_connection.request_sender_token(
           :email      => session.email,
