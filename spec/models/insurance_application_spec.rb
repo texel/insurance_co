@@ -37,11 +37,11 @@ describe InsuranceApplication do
     end
     
     it "should set the signature name" do
-      signature_info.signature_name.should == 'Mike Borozdin'
+      signature_info.signature_name.should == "#{@app.first_name} #{@app.last_name}"
     end
     
     it "should set the signature initials" do
-      signature_info.signature_initials.should == 'MB'
+      signature_info.signature_initials.should == "FL"
     end
     
     %w[Make Model VIN].each do |attr|

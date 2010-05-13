@@ -80,7 +80,7 @@ describe InsuranceApplicationsController do
           
           it "should redirect to envelope path" do
             send_envelope
-            response.should redirect_to(envelopes_path)
+            response.should redirect_to(envelope_path('12345'))
           end
           
           it "should create and send the envelope" do
