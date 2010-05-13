@@ -15,7 +15,7 @@ class InsuranceApplicationsController < ApplicationController
         response        = ds_connection.create_and_send_envelope :envelope => @envelope
         envelope_status = response.create_and_send_envelope_result
 
-        redirect_to envelope_path(envelope_id)
+        redirect_to envelope_path(envelope_status.envelope_id)
         
       when 'complete'
         # Embedded signing
