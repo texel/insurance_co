@@ -38,7 +38,7 @@ module Transient
           :email           => account[:email],
           :password        => password,
           :endpoint_url    => Docusign::Config[:default_endpoint_url],
-          :wiredump_dev    => Docusign::Config[:debug] ? STDOUT : nil
+          :wiredump_dev    => Docusign::Config[:debug] ? Rails.logger.instance_variable_get(:@log) : nil
         )
       else
         missing = []

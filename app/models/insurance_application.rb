@@ -37,9 +37,19 @@ class InsuranceApplication < ActiveRecord::Tableless
           i.signature_initials = initials(r.signer_name)
           i.font_style         = Docusign::FontStyleCode::BradleyHandITC
           i.signature_name     = r.user_name
+        end       
+      end
+      
+      if cc_email.present?
+        e.recipients << Docusign::Recipient.new.tap do |r|
+          r.id                = Time.now.to_i
+          r.signer_name       = 'CC Recipient'
+          r.user_name         = 'CC Recipient'
+          r.type              = Docusign::RecipientTypeCode::CarbonCopy
+          r.email             = cc_email
+          r.access_code       = ''
+          r.require_id_lookup = false
         end
-        
-        logger.debug "recipient: #{r.inspect}"
       end
       
       %w[Make Model VIN].each do |attr|
